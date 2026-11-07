@@ -11,4 +11,4 @@ The change is `POST /api/main/time`. The form field `time` is the Julian day. Th
 
 A calendar date is a sky time only when it includes a clock time. A local clock time uses the observer timezone reported by the connector. A UTC clock time is absolute.
 
-An event is a named sky time stored in one file under `knowledge/events/`. The front matter has `type: event`, a title, and `utc` as an ISO-8601 instant ending in `Z`. The body says what the event is. The skill uses that instant and does not invent one.
+An event is a named sky time stored in one file under `knowledge/events/`. The front matter has `type: event`, a title, and `utc` as an ISO-8601 instant ending in `Z`. The body says what the event is. Setting the sky uses that instant and does not invent one. A local calendar may also read the visibility fields defined in `knowledge/concepts/local-calendar.md`.
