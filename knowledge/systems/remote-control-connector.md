@@ -7,7 +7,7 @@ updated: 2026-11-07
 
 The Remote Control plugin is Stellarium's HTTP connector. In Stellarium, enable the plugin, restart if it asks, then start the server from the plugin's configure dialog. The default address is `http://127.0.0.1:8090`.
 
-The scripts in this repo call three operations:
+The point-sky scripts call these operations:
 
 - `GET /api/main/status` returns the current place, time, field of view, and an HTML description of the selected object.
 - `GET /api/objects/find?str=` returns a JSON array of catalog names that match the search string. A match in that list is not yet a sky target.

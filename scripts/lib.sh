@@ -21,8 +21,9 @@ stellarium_curl() {
 }
 
 ensure_output_dir() {
+  local workflow="${1:-point-sky}"
   local root
   root="$(repo_root)"
-  mkdir -p "${root}/output/point-sky"
-  printf '%s\n' "${root}/output/point-sky"
+  mkdir -p "${root}/output/${workflow}"
+  printf '%s\n' "${root}/output/${workflow}"
 }
