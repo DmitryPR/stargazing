@@ -11,6 +11,8 @@ description: >-
 
 Read the observer place first. Then list upcoming events from `knowledge/events/` that are visible there. Do not invent events, and do not change the sky or the place.
 
+Published instants are fetched by `fetch-events`. That skill stops at a proposal. This skill lists a file only after a person has saved it under `knowledge/events/`.
+
 Run the stages in order. Use the scripts. Do not invent HTTP calls and do not add a client.
 
 ## Read first
