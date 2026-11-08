@@ -9,9 +9,9 @@ description: >-
 
 # Fetch upcoming events
 
-Read the window first. Fetch the named sources second. Stop at the proposal.
+Read the window first. Then check each named page and combine those records. Stop at the proposal.
 
-A row becomes a proposed event only when the page gives a UTC clock time. A peak night without a clock time is listed and left incomplete. Do not invent a time, a rate, or a local moonset. Do not write `knowledge/events/`. Do not change the sky or the place.
+One script checks one page and writes one record. The fetch script combines the records. A row becomes a proposed event only when a record has a UTC clock time. Notes stay notes. Do not invent a time, a rate, or a local moonset. Do not write `knowledge/events/`. Do not change the sky or the place.
 
 Run the stages in order. Use the scripts. Do not invent HTTP calls and do not add a client library.
 
@@ -38,4 +38,4 @@ Execute these. Do not rewrite them for a single run.
 - `bash scripts/events-window.sh --days <count>`
 - `bash scripts/events-fetch.sh`
 
-The window is 366 days unless the person asks for another length. `events-fetch.sh` reads the window file and the source pages. Do not pass URLs to it.
+`events-fetch.sh` runs `scripts/scrapers/usno.sh` and `scripts/scrapers/imo.sh`, then writes the proposal from those records. Do not pass URLs to it.

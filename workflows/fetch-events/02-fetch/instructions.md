@@ -13,7 +13,7 @@ Run:
 bash scripts/events-fetch.sh
 ```
 
-The script downloads the named sources and writes the proposal. It keeps a row as a proposed event only when that row has a UTC clock time. Peak nights without a clock time are listed as incomplete.
+The script runs `scripts/scrapers/usno.sh` and `scripts/scrapers/imo.sh`, then writes the proposal from those records. It keeps a row as a proposed event only when the record has a UTC clock time.
 
 This stage does not write `knowledge/events/` and does not change Stellarium.
 
@@ -21,13 +21,13 @@ This stage does not write `knowledge/events/` and does not change Stellarium.
 
 `output/fetch-events/02-proposed.md`
 
-The raw pages are kept under `output/fetch-events/raw/`. The proposal records each source as fetched or failed, the proposed instants in time order, and the incomplete rows.
+Each scraper record is kept under `output/fetch-events/scraped/`. The proposal records each source as fetched or failed, the proposed instants in time order, the notes that have no clock time, and the other checks.
 
 ## Review checks
 
 This output is important. Stop after this stage.
 
-- Show the proposed instants and the incomplete rows.
+- Show the proposed instants, the rows with no clock time, and the other checks.
 - An empty proposal is a finished fetch. Do not fill it with an invented time.
 - Do not copy this file into `knowledge/`.
 - Save an event file only after the person accepts that instant.
