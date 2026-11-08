@@ -38,6 +38,28 @@ This repository follows that idea. The differences are:
 - Stage outputs share `output/<workflow>/` instead of a folder inside each stage.
 - Inputs name files. They are not labeled as stable reference versus this run's working files.
 
+## Benefits and downsides to control
+
+These are possible effects of this specification. None of them has been measured. Later checks should keep or drop each one.
+
+### Possible benefits
+
+- A fact in `knowledge/` survives a new run, because a run only replaces files under `output/`.
+- The person sees the current place or time before a stage changes Stellarium.
+- The connector calls stay in `scripts/`, so a later run repeats the same call.
+- A skill points at one job, so pointing the sky does not also move the observer.
+- A stage file states the input, the task, and the output, so the next session can continue without reconstructing the HTTP calls.
+
+### Possible downsides
+
+- `status: approved` can be read as external verification. The files have no provenance and no OKF review record.
+- A new run deletes the previous output for that workflow, so the earlier place or time change is not kept.
+- A stage that continues after a passing check can change Stellarium before the person looks.
+- Instructions and scripts can drift, so the stage file and the command no longer match.
+- More skills and event files increase the number of files a session must open.
+- Shared `output/<workflow>/` keeps one run. A failed attempt and the later success are not stored together.
+- Inputs do not say which files are stable facts and which belong only to this run, so a session can treat a generated file as knowledge.
+
 ## Sources
 
 - Open Knowledge Format, [SPEC.md](https://github.com/GoogleCloudPlatform/open-knowledge-format/blob/main/SPEC.md), read 2026-11-08.
