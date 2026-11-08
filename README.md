@@ -1,6 +1,6 @@
 # Star hackathon
 
-The terminal drives Stellarium through its Remote Control connector. Rules are in `CLAUDE.md`. This file is the index.
+The terminal drives Stellarium through its Remote Control connector. Rules are in `CLAUDE.md`. The comparison with Open Knowledge Format and Interpretable Context Methodology is in `SPEC.md`. This file is the index.
 
 ## Skills
 
