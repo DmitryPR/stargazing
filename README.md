@@ -8,6 +8,7 @@ The terminal drives Stellarium through its Remote Control connector. Rules are i
 | --- | --- |
 | [point-sky](.claude/skills/point-sky/SKILL.md) | Aim the view at one catalog object. |
 | [set-location](.claude/skills/set-location/SKILL.md) | Read the observer place, then move it. |
+| [set-heading](.claude/skills/set-heading/SKILL.md) | Read the view heading, then turn the view to a compass bearing. |
 | [set-sky-time](.claude/skills/set-sky-time/SKILL.md) | Read the simulation time, then set one instant from a clock time or an event file. |
 | [local-calendar](.claude/skills/local-calendar/SKILL.md) | Read the place Stellarium is already using, then list upcoming events from `knowledge/events/`. |
 
@@ -15,7 +16,7 @@ Each skill points to its knowledge and its workflow. The stages stay in the skil
 
 ## Handoff
 
-Change the place with `set-location` before `local-calendar`. Show a listed instant with `set-sky-time`. `point-sky` stands on its own.
+Change the place with `set-location` before `local-calendar`. Show a listed instant with `set-sky-time`. Turn the view with `set-heading` after the place is the one the bearing belongs to. `point-sky` stands on its own.
 
 ## Layout
 
