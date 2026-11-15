@@ -1,11 +1,14 @@
 #!/usr/bin/env bash
-# List upcoming sky events visible at the current observer place.
+# List sky events visible at the current observer place.
 # Writes output/local-calendar/02-calendar.md
+# Without --past the window runs forward from computer UTC.
+# With --past the same day count runs backward.
 set -euo pipefail
 
 source "$(dirname "$0")/lib.sh"
 
 days="366"
+past="0"
 while [[ $# -gt 0 ]]; do
   case "$1" in
     --days)
@@ -16,9 +19,13 @@ while [[ $# -gt 0 ]]; do
       days="$2"
       shift 2
       ;;
+    --past)
+      past="1"
+      shift
+      ;;
     *)
       printf 'unknown argument: %s\n' "$1" >&2
-      printf 'usage: bash scripts/calendar-list.sh [--days <count>]\n' >&2
+      printf 'usage: bash scripts/calendar-list.sh [--days <count>] [--past]\n' >&2
       exit 1
       ;;
   esac
@@ -34,7 +41,7 @@ if [[ ! -f "$place" ]]; then
   exit 1
 fi
 
-DAYS_VALUE="$days" REPO_ROOT="$root" python3 - "$place" "$out" <<'PY'
+DAYS_VALUE="$days" PAST_VALUE="$past" REPO_ROOT="$root" python3 - "$place" "$out" <<'PY'
 import math
 import os
 import sys
@@ -100,7 +107,13 @@ except ValueError:
     raise SystemExit("observer place has no coordinates")
 
 now = datetime.now(timezone.utc).replace(microsecond=0)
-until = now + timedelta(days=days)
+past = os.environ["PAST_VALUE"] == "1"
+if past:
+    start = now - timedelta(days=days)
+    until = now
+else:
+    start = now
+    until = now + timedelta(days=days)
 gmt_shift = place.get("gmt_shift", "")
 try:
     offset = timedelta(days=float(gmt_shift))
@@ -122,11 +135,13 @@ for path in paths:
     except (ValueError, TypeError):
         skipped.append(f"- {title}: unreadable utc")
         continue
-    if instant < now:
-        skipped.append(f"- {title}: past")
+    if instant < start:
+        reason = "outside the window" if past else "past"
+        skipped.append(f"- {title}: {reason}")
         continue
     if instant >= until:
-        skipped.append(f"- {title}: outside the window")
+        reason = "upcoming" if past else "outside the window"
+        skipped.append(f"- {title}: {reason}")
         continue
     visibility = (fields.get("visibility") or "").casefold()
     if visibility == "global":
@@ -170,13 +185,14 @@ status: ready
 name: {q(place.get("name", ""))}
 latitude: {place.get("latitude", '""')}
 longitude: {place.get("longitude", '""')}
-from: {q(now.strftime("%Y-%m-%dT%H:%M:%SZ"))}
+from: {q(start.strftime("%Y-%m-%dT%H:%M:%SZ"))}
 until: {q(until.strftime("%Y-%m-%dT%H:%M:%SZ"))}
 days: {days}
+past: {"true" if past else "false"}
 count: {len(included)}
 ---
 
-Upcoming sky events at {place.get("name") or "the observer place"}:
+{"Past" if past else "Upcoming"} sky events at {place.get("name") or "the observer place"}:
 
 {chr(10).join(event_lines)}
 

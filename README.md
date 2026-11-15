@@ -10,14 +10,15 @@ The terminal drives Stellarium through its Remote Control connector. Rules are i
 | [set-location](.claude/skills/set-location/SKILL.md) | Read the observer place, then move it. |
 | [set-heading](.claude/skills/set-heading/SKILL.md) | Read the view heading, then turn the view to a compass bearing. |
 | [set-sky-time](.claude/skills/set-sky-time/SKILL.md) | Read the simulation time, then set one instant from a clock time or an event file. |
-| [local-calendar](.claude/skills/local-calendar/SKILL.md) | Read the place Stellarium is already using, then list upcoming events from `knowledge/events/`. |
+| [local-calendar](.claude/skills/local-calendar/SKILL.md) | Read the place Stellarium is already using, then list events from `knowledge/events/`. `--past` lists events that already happened. |
 | [fetch-events](.claude/skills/fetch-events/SKILL.md) | Check the named pages and combine them into one proposal. A person saves an accepted instant before the calendar can list it. |
+| [read-photo](.claude/skills/read-photo/SKILL.md) | Read the clock, GPS place, and compass bearing stored in one photograph. |
 
 Each skill points to its knowledge and its workflow. The stages stay in the skill.
 
 ## Handoff
 
-Change the place with `set-location` before `local-calendar`. Show a listed instant with `set-sky-time`. Turn the view with `set-heading` after the place is the one the bearing belongs to. Fetch published instants with `fetch-events`. Save an accepted instant into `knowledge/events/` before `local-calendar` can list it. `point-sky` stands on its own.
+Change the place with `set-location` before `local-calendar`. Show a listed instant with `set-sky-time`. Turn the view with `set-heading` after the place is the one the bearing belongs to. Fetch published instants with `fetch-events`. Save an accepted instant into `knowledge/events/` before `local-calendar` can list it. Read a photograph with `read-photo` before using its place, instant, or true heading. `point-sky` stands on its own.
 
 ## Layout
 

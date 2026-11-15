@@ -15,10 +15,12 @@ Run:
 bash scripts/calendar-list.sh
 ```
 
-Or, when the person gave a length:
+Or, when the person gave a length or asked for events that already happened:
 
 ```bash
 bash scripts/calendar-list.sh --days <count>
+bash scripts/calendar-list.sh --past
+bash scripts/calendar-list.sh --past --days <count>
 ```
 
 Read the event files. Do not add an event file unless the person asks. Do not look up new dates to fill an empty calendar.
@@ -27,7 +29,7 @@ Read the event files. Do not add an event file unless the person asks. Do not lo
 
 `output/local-calendar/02-calendar.md`
 
-The file records the place, the UTC window, each included event in time order, and the events that were left out with the reason.
+The file records the place, the UTC window, whether the window runs backward, each included event in time order, and the events that were left out with the reason.
 
 ## Review checks
 

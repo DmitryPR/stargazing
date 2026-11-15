@@ -9,7 +9,7 @@ description: >-
 
 # Local calendar
 
-Read the observer place first. Then list upcoming events from `knowledge/events/` that are visible there. Do not invent events, and do not change the sky or the place.
+Read the observer place first. Then list events from `knowledge/events/` that are visible there. The window runs forward from the computer's current UTC. Pass `--past` when the person asks for events that already happened. Do not invent events, and do not change the sky or the place.
 
 Published instants are fetched by `fetch-events`. That skill stops at a proposal. This skill lists a file only after a person has saved it under `knowledge/events/`.
 
@@ -42,5 +42,7 @@ Execute these. Do not rewrite them for a single run.
 - `bash scripts/calendar-place.sh`
 - `bash scripts/calendar-list.sh`
 - `bash scripts/calendar-list.sh --days <count>`
+- `bash scripts/calendar-list.sh --past`
+- `bash scripts/calendar-list.sh --past --days <count>`
 
 `STELLARIUM_URL` overrides the connector address. The default is `http://127.0.0.1:8090`. `STELLARIUM_PASSWORD` is sent as HTTP Basic auth with an empty username when the connector requires a password.
